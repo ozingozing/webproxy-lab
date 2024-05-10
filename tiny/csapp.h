@@ -12,7 +12,20 @@
 #include <string.h>
 #include <ctype.h>
 #include <setjmp.h>
+
+//signal.h에 SA_접두사 변수들을 쓰려면
+//이 define 걸어줘야함
+#ifndef __USE_POSIX
+#define __USE_POSIX
+#endif
+
+#ifndef __USE_XOPEN2K8
+#define __USE_XOPEN2K8
+#endif
+#include <bits/waitflags.h>
+//추가
 #include <signal.h>
+//
 #include <dirent.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -25,9 +38,24 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include <sys/socket.h>
+
+//__USE_XOPEN2K는
+//시스템 헤더 파일 내에서 조건부 컴파일을 위해 사용되며,
+//이는 POSIX.1-2001 (X/Open System Interface, XSI) 표준 관련 기능을
+//활성화하는 데 사용됩니다. 
+#ifndef __USE_XOPEN2K
+#define __USE_XOPEN2K
+#endif
+//추가
 #include <netdb.h>
+//
 #include <netinet/in.h>
 #include <arpa/inet.h>
+
+///////
+#include <stdint.h>
+#include <strings.h>
+///////
 
 /* Default file permissions are DEF_MODE & ~DEF_UMASK */
 /* $begin createmasks */
@@ -48,6 +76,7 @@ typedef struct {
     int rio_cnt;               /* Unread bytes in internal buf */
     char *rio_bufptr;          /* Next unread byte in internal buf */
     char rio_buf[RIO_BUFSIZE]; /* Internal buffer */
+    
 } rio_t;
 /* $end rio_t */
 

@@ -22,6 +22,7 @@
 #ifndef __USE_XOPEN2K8
 #define __USE_XOPEN2K8
 #endif
+#include <bits/waitflags.h>
 //추가
 #include <signal.h>
 //
@@ -53,6 +54,7 @@
 
 ///////
 #include <stdint.h>
+#include <strings.h>
 ///////
 
 /* Default file permissions are DEF_MODE & ~DEF_UMASK */

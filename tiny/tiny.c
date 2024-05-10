@@ -61,7 +61,7 @@ void doit(int fd)
   printf("%s", buf);
   sscanf(buf, "%s %s %s", method, uri, version);
 
-  if (strcasecmp(method, "GET") * strcasecmp(method, "HEAD"))
+  if (strcasecmp(method, "GET") && strcasecmp(method, "HEAD"))
   {
     clienterror(fd, method, "501", "Mot implemented", "Tiny does not implement this method");
     return;
@@ -191,7 +191,7 @@ void serve_static(int fd, char *filename, int filesize, char *method)
   printf("Respinse headers:\n");
   printf("%s", buf);
 
-  //if(strcasecmp(method, "HEAD") == 0) return;
+  if(strcasecmp(method, "HEAD") == 0) return;
 
   /*Send respinse body to client*/
   srcfd = Open(filename, O_RDONLY, 0);
